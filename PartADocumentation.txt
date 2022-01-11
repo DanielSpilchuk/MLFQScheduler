@@ -1,0 +1,27 @@
+Part A Documentation
+Joel Siemens and Daniel Spilchuk
+
+In Part A, the system call was added to files 'syscall.h', 'user.h',
+'usys.pl', 'syscall.c', 'sysproc.c'.
+
+The file 'proc.c' was changed to have the uint64 created, ended, and running to assist the 'waitstat' process.
+
+In the first iteration, 'test.c' was created and had a basic nonfunctional outline of the program.
+
+Then waitstat was added in 'def.h' so that it could execute. 'proc.c' was modified to have the waitstat variables
+be computed, with p->running being changed in the scheduler. In file, 'sysproc.c' the waitstat call was modified to
+correctly have variables passed. 
+
+p->ended, p->created, p->running are incremented and implemented throughout the 'proc.c' file and are used in 
+calculating the wait and run variables.
+
+Both wait and run variables are copyed to the user space using copyout allowing them to be read by the test program.
+
+The test program completes the calulation for all three groups and then sums the total turnaround times and running times
+however it is not done through each group of 15 separately.
+
+As of now the program runs as intended. Besides from the separate groups.
+
+The Makefile was changed to allow the kernel to run the test program for the waitstat process and the toolprefix was changed.
+
+No changes were made to files not listed.

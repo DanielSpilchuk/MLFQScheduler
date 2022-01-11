@@ -1,0 +1,53 @@
+Part B Documentation
+Joel Siemens and Daniel Spilchuk
+
+In Part B, the function 'MLFQ_scheduler' was created in 'proc.c'.
+
+The proc structure is changed in the 'proc.c' to have a priority state.
+'param.h' recieved two new definitions for the the amount of times medium 
+priority processes run before getting dropped to low priority. The second is
+the amount of times all processes run before getting pushed to high priority.
+
+'def.h' was modified to include the new header for the scheduler.
+
+The MLFQ_scheduler has loops to check for each level of priority and a lower loop
+that is triggered if total process loops is hit.
+
+
+As of now the program does run.
+
+No changes were made to files not listed.
+
+
+Performance differences between normal scheduler and MLFQ.
+Original sched.
+$ test 10000 3000 5000 2500
+
+Testing waitstat(): 
+Waittime, total sum: 282
+Runtime, total sum: 83
+
+MLFQ sched.
+$ test 10000 3000 5000 2500
+
+Testing waitstat(): 
+Waittime, total sum: 322
+Runtime, total sum: 84
+
+Impact of values of mtimes and moveup.
+mtimes if low would spread out CPU usage but would interupt more often which
+would waste CPU time. If high, then tasks would have more done but starvation 
+could be an issue. 
+
+moveup if low would cause some tasks to always be at the top of the priority and
+could spread out the CPU time out too much.
+
+
+Strengths- No single process will take up all of the processing time. A more fair share
+of the CPU. 
+
+
+Weaknesses- Processes can suffer from short starvation if the moveup definition is too
+long, slightly slower that original.
+
+Improvements- to be able to loop less throughout.
